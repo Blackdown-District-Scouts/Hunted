@@ -1,0 +1,10 @@
+{
+  "name": "hunted-ws",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Broadcast relay for live multi-admin updates",
+  "main": "server.js",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

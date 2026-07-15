@@ -1,0 +1,40 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      # host:container — bound to 0.0.0.0 so other computers on the LAN can reach it
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: hunted
+      DB_USER: hunted
+      DB_PASS: huntedpass
+
+  ws:
+    build: ./ws
+    restart: unless-stopped
+    ports:
+      # WebSocket relay for live multi-admin updates
+      - "8081:8081"
+
+  db:
+    image: mysql:8
+    restart: unless-stopped
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_DATABASE: hunted
+      MYSQL_USER: hunted
+      MYSQL_PASSWORD: huntedpass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
