@@ -1,5 +1,7 @@
 # Hunted — Game Tracker
 
+This game was run by Blackdown District Scouts as part of their district camp, this software is provided as is and with no warranty or support.
+
 A small PHP + MySQL web app to run and score a **Hunted** game, served from Docker
 and reachable by other computers on your local network.
 
